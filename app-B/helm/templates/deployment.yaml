@@ -22,3 +22,5 @@ spec:
         env:
           - name: MY_ENV
             value: {{ .Values.env.value }}
+          - name: APP_NAME
+            value: {{ .Values.name }}
