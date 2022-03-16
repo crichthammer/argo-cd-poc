@@ -39,6 +39,9 @@ kubectl -n argocd delete secret argocd-initial-admin-secret --ignore-not-found=t
 # is 1234
 kubectl -n argocd patch secret argocd-secret -p '{"stringData": {"admin.password": "$2a$12$lsj.ZMc45C3g3zDwF1E4nufjDE8LsmT/8wBBP0WORi0TcAeQ.1Wje"}}'
 
+kubectl apply -f infra/app.yaml
+kubectl apply -f infra/prod-app.yaml
+
 echo ""
 echo "[DONE]"
 echo ""
