@@ -11,7 +11,7 @@ spec:
   project: default
   source:
     path: app-B/helm
-    repoURL: https://github.com/Kazeheki/argo-cd-poc.git
+    repoURL: {{ .Values.apps.b.repoUrl }}
     targetRevision: HEAD
   destination:
     namespace: {{ .Values.apps.namespace }}

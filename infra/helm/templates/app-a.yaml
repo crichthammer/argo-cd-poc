@@ -11,7 +11,7 @@ spec:
   project: default
   source:
     path: app-A/helm
-    repoURL: https://github.com/Kazeheki/argo-cd-poc.git
+    repoURL: {{ .Values.apps.a.repoUrl }}
     targetRevision: HEAD
     {{- with (.Values.apps.a).overrideValues }}
     helm:
