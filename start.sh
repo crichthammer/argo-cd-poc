@@ -28,11 +28,8 @@ kubectl config use-context k3d-argo-cd-poc
 kubectl create namespace dev
 kubectl create namespace argocd
 
-docker build -t localhost:5000/example/app-a ./app-A
-docker image push localhost:5000/example/app-a
-
-docker build -t localhost:5000/example/app-b ./app-B
-docker image push localhost:5000/example/app-b
+docker build -t localhost:5000/example/app ./common-src
+docker image push localhost:5000/example/app
 
 helm repo add argo https://argoproj.github.io/argo-helm
 echo "installing.."

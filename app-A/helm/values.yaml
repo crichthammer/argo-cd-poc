@@ -1,4 +1,4 @@
-image: local-registry:5000/example/app-a
+image: local-registry:5000/example/app
 tag: latest
 
 name: app-a
