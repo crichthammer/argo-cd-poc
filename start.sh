@@ -35,14 +35,17 @@ docker build -t localhost:5000/example/app-b ./app-B
 docker image push localhost:5000/example/app-b
 
 helm repo add argo https://argoproj.github.io/argo-helm
-helm install argocd argo/argo-cd -n argocd
-
-kubectl rollout status -n argocd deployment/argocd-server
+echo "installing.."
+helm install argocd argo/argo-cd -n argocd -f infra/argo-cd.yaml --wait --timeout 8m0s
 
 kubectl -n argocd delete secret argocd-initial-admin-secret --ignore-not-found=true
 # is 1234
 kubectl -n argocd patch secret argocd-secret -p '{"stringData": {"admin.password": "$2a$12$lsj.ZMc45C3g3zDwF1E4nufjDE8LsmT/8wBBP0WORi0TcAeQ.1Wje"}}'
 
+echo ""
+echo "[DONE]"
+echo ""
 echo "Run 'kubectl port-forward service/argocd-server -n argocd 18080:443'"
 echo "Then access in browser 'localhost:18080'"
+echo ""
 
