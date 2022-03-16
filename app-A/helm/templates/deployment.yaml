@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.name }}
+  name: {{ .Values.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+    spec:
+      containers:
+      - image: {{ .Values.image }}:{{ .Values.tag | default "latest" }}
+        name: {{ .Values.name }}
+        resources: {}
+        env:
+          - name: MY_ENV
+            value: {{ .Values.env.value }}

@@ -1,0 +1,16 @@
+apiVersion: k3d.io/v1alpha4
+kind: Simple
+metadata:
+  name: argo-cd-poc
+servers: 1
+agents: 2
+image: rancher/k3s:v1.20.4-k3s1
+ports:
+  - port: 8080:80
+    nodeFilters:
+      - loadbalancer
+registries:
+  create:
+      name: local-registry
+      host: "0.0.0.0"
+      hostPort: "5000"

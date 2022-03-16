@@ -1,0 +1,7 @@
+image: local-registry:5000/example/app-a
+tag: latest
+
+name: app-a
+
+env:
+  value: default value
