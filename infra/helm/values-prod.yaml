@@ -1,2 +1,6 @@
 apps:
   namespace: prod
+  a:
+    overrideValues:
+      env:
+        value: new value
