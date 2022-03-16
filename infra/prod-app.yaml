@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 
 metadata:
-  name: app-b
+  name: my-prod-example-with-apps
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -10,11 +10,14 @@ metadata:
 spec:
   project: default
   source:
-    path: app-B/helm
+    path: infra/helm
     repoURL: https://github.com/Kazeheki/argo-cd-poc.git
     targetRevision: HEAD
+    helm:
+      valueFiles:
+        - values-prod.yaml
   destination:
-    namespace: {{ .Values.apps.namespace }}
+    namespace: prod
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:

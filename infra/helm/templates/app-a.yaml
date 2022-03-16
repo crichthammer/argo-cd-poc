@@ -14,7 +14,7 @@ spec:
     repoURL: https://github.com/Kazeheki/argo-cd-poc.git
     targetRevision: HEAD
   destination:
-    namespace: dev
+    namespace: {{ .Values.apps.namespace }}
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:
