@@ -13,7 +13,6 @@ spec:
     path: app-A/helm
     repoURL: https://github.com/Kazeheki/argo-cd-poc.git
     targetRevision: HEAD
-    helm: {}
   destination:
     namespace: dev
     server: https://kubernetes.default.svc
