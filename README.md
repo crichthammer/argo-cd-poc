@@ -7,6 +7,7 @@ Contents:
 
 - [Local setup](#local-setup)
 - [Concept](#concept)
+- [References](#references)
 
 ## Local setup
 
@@ -205,4 +206,10 @@ Example outline:
 
 - The only way I found to overwrite the values of inner apps (app-a/app-b) is via the
   Argo Application block file `spec.source.helm.values`. This might get confusing if
-  the number of values to change is really large. 
+  the number of values to change is really large.
+
+## References
+
+| Title                                                                                 | Link                         |
+|:--------------------------------------------------------------------------------------|:-----------------------------|
+| Argo CD - Applying GitOps Principles To Manage A Production Environment In Kubernetes | https://youtu.be/vpWQeoaiRM4 |
