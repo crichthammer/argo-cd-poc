@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 
 metadata:
-  name: my-example-app-with-apps
+  name: example-DEV
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -12,7 +12,7 @@ spec:
   source:
     path: infra/helm
     repoURL: https://github.com/Kazeheki/argo-cd-poc.git
-    targetRevision: HEAD
+    targetRevision: different-structure
   destination:
     namespace: dev
     server: https://kubernetes.default.svc

@@ -33,14 +33,14 @@ docker image push localhost:5000/example/app
 
 helm repo add argo https://argoproj.github.io/argo-helm
 echo "installing.."
-helm install argocd argo/argo-cd -n argocd -f infra/argo-cd.yaml --wait --timeout 8m0s
+helm install argocd argo/argo-cd -n argocd -f infra/argo/argo-cd-config.yaml --wait --timeout 8m0s
 
 kubectl -n argocd delete secret argocd-initial-admin-secret --ignore-not-found=true
 # is 1234
 kubectl -n argocd patch secret argocd-secret -p '{"stringData": {"admin.password": "$2a$12$lsj.ZMc45C3g3zDwF1E4nufjDE8LsmT/8wBBP0WORi0TcAeQ.1Wje"}}'
 
-kubectl apply -f infra/app.yaml
-kubectl apply -f infra/prod-app.yaml
+kubectl apply -f infra/application-dev.yaml
+kubectl apply -f infra/application-prod.yaml
 
 echo ""
 echo "[DONE]"
