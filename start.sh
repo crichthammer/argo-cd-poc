@@ -23,21 +23,38 @@ if [ ${#needed_tools[@]} != "0" ]; then
   exit 1
 fi
 
+#################
+# Setup cluster #
+#################
+
 k3d cluster create --config k3d.yaml
 kubectl config use-context k3d-argo-cd-poc
-kubectl create namespace dev
-kubectl create namespace argocd
+
+################
+# Build images #
+################
 
 docker build -t localhost:5000/example/app ./common-src
 docker image push localhost:5000/example/app
 
+#################
+# Setup Argo CD #
+#################
+
 helm repo add argo https://argoproj.github.io/argo-helm
-echo "installing.."
+echo ""
+echo "installing argo-cd .."
 helm install argocd argo/argo-cd -n argocd -f infra/argo/argo-cd-config.yaml --wait --timeout 8m0s
 
 kubectl -n argocd delete secret argocd-initial-admin-secret --ignore-not-found=true
 # is 1234
 kubectl -n argocd patch secret argocd-secret -p '{"stringData": {"admin.password": "$2a$12$lsj.ZMc45C3g3zDwF1E4nufjDE8LsmT/8wBBP0WORi0TcAeQ.1Wje"}}'
+
+###############################
+# Apply all argo applications #
+###############################
+
+kubectl apply -f infra/argo/sealed-secrets-application.yaml
 
 kubectl apply -f infra/application-dev.yaml
 kubectl apply -f infra/application-prod.yaml
