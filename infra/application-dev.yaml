@@ -12,7 +12,7 @@ spec:
   source:
     path: infra/helm
     repoURL: https://github.com/Kazeheki/argo-cd-poc.git
-    targetRevision: main
+    targetRevision: with-secrets
   destination:
     namespace: dev
     server: https://kubernetes.default.svc
