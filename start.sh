@@ -30,6 +30,8 @@ fi
 k3d cluster create --config k3d.yaml
 kubectl config use-context k3d-argo-cd-poc
 
+kubectl create namespace argocd
+
 ################
 # Build images #
 ################
@@ -41,6 +43,8 @@ docker image push localhost:5000/example/app
 # Setup Argo CD #
 #################
 
+echo ""
+echo "getting helm repository argo .."
 helm repo add argo https://argoproj.github.io/argo-helm
 echo ""
 echo "installing argo-cd .."
