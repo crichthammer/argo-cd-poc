@@ -14,6 +14,9 @@ fi
 if ! [ -x "$(command -v helm)" ]; then
   needed_tools+=("helm")
 fi
+if ! [ -x "$(command -v kubeseal)" ]; then
+  needed_tools+=("kubeseal")
+fi
 
 if [ ${#needed_tools[@]} != "0" ]; then
   echo "The following tools are missing:"
@@ -53,6 +56,13 @@ helm install argocd argo/argo-cd -n argocd -f infra/argo/argo-cd-config.yaml --w
 kubectl -n argocd delete secret argocd-initial-admin-secret --ignore-not-found=true
 # is 1234
 kubectl -n argocd patch secret argocd-secret -p '{"stringData": {"admin.password": "$2a$12$lsj.ZMc45C3g3zDwF1E4nufjDE8LsmT/8wBBP0WORi0TcAeQ.1Wje"}}'
+
+##################################
+# Seal secrets with your cluster #
+##################################
+
+kubeseal < infra/secrets/raw/example-dev.json > infra/secrets/dev/sealed-example.json
+kubeseal < infra/secrets/raw/example-prod.json > infra/secrets/prod/sealed-example.json
 
 ###############################
 # Apply all argo applications #
