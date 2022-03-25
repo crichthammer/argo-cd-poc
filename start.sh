@@ -57,13 +57,6 @@ kubectl -n argocd delete secret argocd-initial-admin-secret --ignore-not-found=t
 # is 1234
 kubectl -n argocd patch secret argocd-secret -p '{"stringData": {"admin.password": "$2a$12$lsj.ZMc45C3g3zDwF1E4nufjDE8LsmT/8wBBP0WORi0TcAeQ.1Wje"}}'
 
-##################################
-# Seal secrets with your cluster #
-##################################
-
-kubeseal < infra/secrets/raw/example-dev.json > infra/secrets/dev/sealed-example.json
-kubeseal < infra/secrets/raw/example-prod.json > infra/secrets/prod/sealed-example.json
-
 ###############################
 # Apply all argo applications #
 ###############################
@@ -72,6 +65,29 @@ kubectl apply -f infra/argo/sealed-secrets-application.yaml
 
 kubectl apply -f infra/application-dev.yaml
 kubectl apply -f infra/application-prod.yaml
+
+##################################
+# Seal secrets with your cluster #
+##################################
+
+sealed_secrets_rolled_out=1
+while [ $sealed_secrets_rolled_out -ne 0 ]; do
+  kubectl rollout status deploy/sealed-secrets-controller -n kube-system
+  sealed_secrets_rolled_out=$?
+done
+
+kubeseal < infra/secrets/raw/example-dev.json > infra/secrets/dev/sealed-example.json
+kubeseal < infra/secrets/raw/example-prod.json > infra/secrets/prod/sealed-example.json
+
+# have to commit because Argo will get these from the repository
+git add infra/secrets/prod/sealed-example.json -f
+git add infra/secrets/dev/sealed-example.json -f
+git commit -m "[auto] update sealed-secrets"
+git push
+
+##############################
+# Apply Secrets Applications #
+##############################
 
 kubectl apply -f infra/secrets-dev.yaml
 kubectl apply -f infra/secrets-prod.yaml
