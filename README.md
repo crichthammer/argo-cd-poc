@@ -13,6 +13,7 @@ Contents:
 
 In this section you can find how to test out this concept yourself on your local
 machine.
+In order for this to work smoothly, I recommend you to fork this repository. The start script will push to the repository as the sealed secrets example won't work otherwise for your local Kubernetes cluster. Check out [what you need to do after forking](#for-forked-repositories).
 
 **Tools you'll need**
 
