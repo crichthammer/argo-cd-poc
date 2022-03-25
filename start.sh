@@ -73,6 +73,9 @@ kubectl apply -f infra/argo/sealed-secrets-application.yaml
 kubectl apply -f infra/application-dev.yaml
 kubectl apply -f infra/application-prod.yaml
 
+kubectl apply -f infra/secrets-dev.yaml
+kubectl apply -f infra/secrets-prod.yaml
+
 echo ""
 echo "[DONE]"
 echo ""
