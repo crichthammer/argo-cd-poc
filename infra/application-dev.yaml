@@ -11,7 +11,7 @@ spec:
   project: default
   source:
     path: infra/helm
-    repoURL: https://github.com/Kazeheki/argo-cd-poc.git
+    repoURL: https://github.com/crichthammer/argo-cd-poc.git
     targetRevision: main
   destination:
     namespace: dev

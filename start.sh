@@ -1,30 +1,30 @@
 #!/usr/bin/env bash
 
-needed_tools=()
+#needed_tools=()
 
-if ! [ -x "$(command -v k3d)" ]; then
-  needed_tools+=("k3d")
-fi
-if ! [ -x "$(command -v kubectl)" ]; then
-  needed_tools+=("kubectl")
-fi
-if ! [ -x "$(command -v docker)" ]; then
-  needed_tools+=("docker")
-fi
-if ! [ -x "$(command -v helm)" ]; then
-  needed_tools+=("helm")
-fi
-if ! [ -x "$(command -v kubeseal)" ]; then
-  needed_tools+=("kubeseal")
-fi
+#if ! [ -x "$(command -v k3d)" ]; then
+#  needed_tools+=("k3d")
+#fi
+#if ! [ -x "$(command -v kubectl)" ]; then
+#  needed_tools+=("kubectl")
+#fi
+#if ! [ -x "$(command -v docker)" ]; then
+#  needed_tools+=("docker")
+#fi
+#if ! [ -x "$(command -v helm)" ]; then
+#  needed_tools+=("helm")
+#fi
+#if ! [ -x "$(command -v kubeseal)" ]; then
+#  needed_tools+=("kubeseal")
+#fi
 
-if [ ${#needed_tools[@]} != "0" ]; then
-  echo "The following tools are missing:"
-  for item in "${needed_tools[@]}"; do
-    echo "$item"
-  done
-  exit 1
-fi
+#if [ ${#needed_tools[@]} != "0" ]; then
+#  echo "The following tools are missing:"
+#  for item in "${needed_tools[@]}"; do
+#    echo "$item"
+#  done
+#  exit 1
+#fi
 
 #################
 # Setup cluster #

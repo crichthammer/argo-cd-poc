@@ -1,6 +1,6 @@
 apps:
   namespace: dev
   a:
-    repoUrl: https://github.com/Kazeheki/argo-cd-poc.git
+    repoUrl: https://github.com/crichthammer/argo-cd-poc.git
   b:
-    repoUrl: https://github.com/Kazeheki/argo-cd-poc.git
+    repoUrl: https://github.com/crichthammer/argo-cd-poc.git
